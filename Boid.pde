@@ -18,18 +18,24 @@ class Boid {
   int fcount, lastm;
   float frate;
   int fint = 3;
-  Boid(Vector inPos) {
+  
+  int figura=0;
+  Boid(Vector inPos, int f) {
+    figura =  f;
     grabsMouseColor = color(0, 0, 255);
     avatarColor = color(255, 255, 0);
     position = new Vector();
     position.set(inPos);
+
     node = new Node(scene) {
       // Note that within visit() geometry is defined at the
       // node local coordinate system.
       @Override
       public void visit() {
+        /*
         if (animate)
           run(flock);
+          */
         render();
       }
 
@@ -53,6 +59,15 @@ class Boid {
   public void run(ArrayList<Boid> boids) {
     t += .1;
     flap = 10 * sin(t);
+    
+    //if(figura == 1){
+      
+     // Vector Vector1 = new Vector(mouseX,mouseY,300);
+     
+     // acceleration.add(Vector1);
+      
+     // acceleration.add(new Vector(0,.05,0));  
+      // }
     // acceleration.add(steer(new Vector(mouseX,mouseY,300),true));
     // acceleration.add(new Vector(0,.05,0));
     if (avoidWalls) {
@@ -163,6 +178,7 @@ class Boid {
     fill(color(255, 0, 0, 125));
 
     // visual modes
+    /*
     switch(mode) {
     case 1:
       noFill();
@@ -174,7 +190,7 @@ class Boid {
       strokeWeight(3);
       kind = POINTS;
       break;
-    }
+    }*/
 
     // highlight boids under the mouse
     if (node.track(mouseX, mouseY)) {
@@ -209,8 +225,13 @@ class Boid {
     endShape();
     */
     scale(10);
-    shape(ct,0,0);
+    //if(figura==1){
+    
+    //shape(ct,0,0,8,8);
+  //  }else{
     shape(s,0,0);
+
+    //}
     //shape(t,0,0);
     popStyle();
     hint(ENABLE_DEPTH_TEST);

@@ -1,0 +1,82 @@
+class Cat{
+  //hola :v
+  PShape shape;
+  Cat(){
+    ct = loadShape("cat.obj");
+    scale(50);
+    shape(ct,0,0);
+    render();
+  }
+  
+  PShape getShape(){
+    System.out.println("esta entrando");
+    return shape;
+  }
+  
+  void render() {
+    pushStyle();
+
+    // uncomment to draw boid axes
+ //   scene.drawAxes(10);
+
+    //int kind = TRIANGLES;
+    strokeWeight(2);
+    stroke(color(0, 255, 0));
+    fill(color(255, 0, 0, 125));
+
+    // visual modes
+    switch(mode) {
+    case 1:
+      noFill();
+      break;
+    case 2:
+      noStroke();
+      break;
+    case 3:
+      strokeWeight(3);
+      //kind = POINTS;
+      break;
+    }
+  /*
+    // highlight boids under the mouse
+    if (node.track(mouseX, mouseY)) {
+      noStroke();
+      fill(grabsMouseColor);
+    }
+
+    // highlight avatar
+    if (node == avatar) {
+      noStroke();
+      fill(avatarColor);
+    }
+
+    //draw boid
+    /*
+    beginShape(kind);
+    vertex(3 * sc, 0, 0);
+    vertex(-3 * sc, 2 * sc, 0);
+    vertex(-3 * sc, -2 * sc, 0);
+
+    vertex(3 * sc, 0, 0);
+    vertex(-3 * sc, 2 * sc, 0);
+    vertex(-3 * sc, 0, 2 * sc);
+
+    vertex(3 * sc, 0, 0);
+    vertex(-3 * sc, 0, 2 * sc);
+    vertex(-3 * sc, -2 * sc, 0);
+
+    vertex(-3 * sc, 0, 2 * sc);
+    vertex(-3 * sc, 2 * sc, 0);
+    vertex(-3 * sc, -2 * sc, 0);
+    endShape();
+    */
+    scale(10);
+    
+    shape(ct,0,0);
+
+
+    popStyle();
+    hint(ENABLE_DEPTH_TEST);
+ 
+  }
+}

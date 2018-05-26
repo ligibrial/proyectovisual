@@ -96,6 +96,6 @@ class Cube {
   }
   
   PShape getShape(){
-  return shape;
+    return shape;
   }
 }

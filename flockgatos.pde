@@ -28,6 +28,7 @@ int flockWidth = 1280;
 int flockHeight = 720;
 int flockDepth = 600;
 boolean avoidWalls = true;
+int catx=100,caty=100,catz=100;
 
 // visual modes
 // 0. Faces and edges
@@ -36,17 +37,19 @@ boolean avoidWalls = true;
 // 3. Only points
 int mode;
 
-int initBoidNum = 100; // amount of boids to start the program with
+int initBoidNum = 1; // amount of boids to start the program with
 ArrayList<Boid> flock;
+ArrayList<Boid> cat;
 Node avatar;
 boolean animate = true;
 
 PShape s,ct;
-
 Cube cubo;
+Cat gato;
+
 void setup() {
   size(1000, 800, P3D);
-  ct = loadShape("cat.obj");
+  //1
   scene = new Scene(this);
   scene.setBoundingBox(new Vector(0, 0, 0), new Vector(flockWidth, flockHeight, flockDepth));
   scene.setAnchor(scene.center());
@@ -58,11 +61,17 @@ void setup() {
   scene.fitBall();
   // create and fill the list of boids
   cubo = new Cube();
+  gato =  new Cat();
   s = cubo.getShape();
-  
+  ct = gato.getShape();
   flock = new ArrayList();
-  for (int i = 0; i < initBoidNum; i++)
-    flock.add(new Boid(new Vector(flockWidth / 2, flockHeight / 2, flockDepth / 2)));
+  new Boid(new Vector(),0);
+  //for (int i = 0; i < initBoidNum; i++)
+  //  flock.add(new Boid(new Vector(flockWidth / 2, flockHeight / 2, flockDepth / 2),0));
+  
+  //  cat.add(new Boid(new Vector(flockWidth/2 , flockHeight/2 , flockDepth/2 ),1));
+  
+
 }
 
 void draw() {
@@ -71,6 +80,7 @@ void draw() {
   directionalLight(255, 255, 255, 0, 1, -100);
   walls();
   // Calls Node.visit() on all scene nodes.
+  
   scene.traverse();
   
 }
@@ -127,6 +137,15 @@ void keyPressed() {
       scene.eye().setReference(avatar);
       scene.interpolateTo(avatar);
     }
+    break;
+  
+  case 'y':
+    catx++;
+    System.out.println(catx);
+    break;
+  case 'h':
+    catx--;
+    System.out.println(catx);
     break;
   }
 }
