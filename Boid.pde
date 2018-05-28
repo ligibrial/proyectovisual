@@ -6,8 +6,8 @@ class Boid {
   Vector position, velocity, acceleration, alignment, cohesion, separation; // position, velocity, and acceleration in
   // a vector datatype
   float neighborhoodRadius; // radius in which it looks for fellow boids
-  float maxSpeed = 4; // maximum magnitude for the velocity vector
-  float maxSteerForce = .1f; // maximum magnitude of the steering vector
+  float maxSpeed = 3; // maximum magnitude for the velocity vector
+  float maxSteerForce = 0.01f; // maximum magnitude of the steering vector
   float sc = 3; // scale factor for the render of the boid
   //float sc= 100;
   float flap = 0;
@@ -32,10 +32,10 @@ class Boid {
       // node local coordinate system.
       @Override
       public void visit() {
-        /*
+        
         if (animate)
           run(flock);
-          */
+          
         render();
       }
 
@@ -54,6 +54,7 @@ class Boid {
     velocity = new Vector(random(-1, 1), random(-1, 1), random(1, -1));
     acceleration = new Vector(0, 0, 0);
     neighborhoodRadius = 100;
+    //System.out.println( node.position().x() + " " + node.position().y() + " " + node.position().z() + " ");
   }
 
   public void run(ArrayList<Boid> boids) {
@@ -170,7 +171,7 @@ class Boid {
     pushStyle();
 
     // uncomment to draw boid axes
- //   scene.drawAxes(10);
+    scene.drawAxes(100);
 
     int kind = TRIANGLES;
     strokeWeight(2);

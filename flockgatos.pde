@@ -29,6 +29,7 @@ int flockHeight = 720;
 int flockDepth = 600;
 boolean avoidWalls = true;
 int catx=100,caty=100,catz=100;
+int catmovex=0,catmovey=0,catmovez=0;
 
 // visual modes
 // 0. Faces and edges
@@ -37,7 +38,7 @@ int catx=100,caty=100,catz=100;
 // 3. Only points
 int mode;
 
-int initBoidNum = 1; // amount of boids to start the program with
+int initBoidNum = 10; // amount of boids to start the program with
 ArrayList<Boid> flock;
 ArrayList<Boid> cat;
 Node avatar;
@@ -65,9 +66,9 @@ void setup() {
   s = cubo.getShape();
   ct = gato.getShape();
   flock = new ArrayList();
-  new Boid(new Vector(),0);
-  //for (int i = 0; i < initBoidNum; i++)
-  //  flock.add(new Boid(new Vector(flockWidth / 2, flockHeight / 2, flockDepth / 2),0));
+  //new Boid(new Vector(),0);
+  for (int i = 0; i < initBoidNum; i++)
+    flock.add(new Boid(new Vector(flockWidth / 2, flockHeight / 2, flockDepth / 2),0));
   
   //  cat.add(new Boid(new Vector(flockWidth/2 , flockHeight/2 , flockDepth/2 ),1));
   
@@ -140,12 +141,12 @@ void keyPressed() {
     break;
   
   case 'y':
-    catx++;
-    System.out.println(catx);
+    catmovex = min(1,catmovex+1);
+    System.out.println(catmovex);
     break;
   case 'h':
-    catx--;
-    System.out.println(catx);
+    catmovex = max(-1,catmovex-1);
+    System.out.println(catmovex);
     break;
   }
 }
