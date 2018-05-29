@@ -110,8 +110,8 @@ void draw() {
   //nuevo 
   
   shader(texlightShader);
-  pointLight(255, 255, 255, width/2, height, 200);
-  translate(width/2, height/2);
+  pointLight(300, 300, 300, width/2, height, 300);
+  translate(600, height/2);
   rotateY(angle);
   shape(can);  
   angle += 0.01;
