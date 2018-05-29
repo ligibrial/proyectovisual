@@ -41,12 +41,22 @@ int mode;
 int initBoidNum = 10; // amount of boids to start the program with
 ArrayList<Boid> flock;
 ArrayList<Boid> cat;
+
 Node avatar;
 boolean animate = true;
 
-PShape s,ct;
+PShape s,ct,sh,cube;
 Cube cubo;
 Cat gato;
+
+//nuevo
+PShape can;
+float angle;
+
+
+float weight = 50;
+PShader texlightShader;
+PImage label;
 
 void setup() {
   size(1000, 800, P3D);
@@ -61,11 +71,24 @@ void setup() {
   scene.setDefaultGrabber(eye);
   scene.fitBall();
   // create and fill the list of boids
+  //nuevo 
+  
+  
+ // hint(DISABLE_DEPTH_MASK);
   cubo = new Cube();
   gato =  new Cat();
   s = cubo.getShape();
   ct = gato.getShape();
+   
+  
+  hint(DISABLE_DEPTH_MASK);
+  label = loadImage("lachoy4.jpg");
+  can = createCan(100, 200, 32, label);
+  texlightShader = loadShader("texlightfrag.glsl", "texlightvert.glsl");
+  
+
   flock = new ArrayList();
+ 
   //new Boid(new Vector(),0);
   for (int i = 0; i < initBoidNum; i++)
     flock.add(new Boid(new Vector(flockWidth / 2, flockHeight / 2, flockDepth / 2),0));
@@ -79,10 +102,19 @@ void draw() {
   background(0);
   ambientLight(128, 128, 128);
   directionalLight(255, 255, 255, 0, 1, -100);
+  //NUEVO
+  
   walls();
   // Calls Node.visit() on all scene nodes.
+   scene.traverse();
+  //nuevo 
   
-  scene.traverse();
+  shader(texlightShader);
+  pointLight(255, 255, 255, width/2, height, 200);
+  translate(width/2, height/2);
+  rotateY(angle);
+  shape(can);  
+  angle += 0.01;
   
 }
 
@@ -107,9 +139,28 @@ void walls() {
   line(flockWidth, flockHeight, 0, flockWidth, flockHeight, flockDepth);
   popStyle();
 }
+///////////////nuevo
+PShape createCan(float r, float h, int detail, PImage tex) {
+  textureMode(NORMAL);
+  PShape sh = createShape();
+  sh.beginShape(QUAD_STRIP);
+  sh.noStroke();
+  sh.texture(tex);
+  for (int i = 0; i <= detail; i++) {
+    float angle = TWO_PI / detail;
+    float x = sin(i * angle);
+    float z = cos(i * angle);
+    float u = float(i) / detail;
+    sh.normal(x, 0, z);
+    sh.vertex(x * r, -h/2, z * r, u, 0);
+    sh.vertex(x * r, +h/2, z * r, u, 1);    
+  }
+  sh.endShape(); 
+  return sh;
+}
 
 void keyPressed() {
-  switch (key) {
+  switch (keyCode) {
   case 'a':
     animate = !animate;
     break;
@@ -140,13 +191,22 @@ void keyPressed() {
     }
     break;
   
-  case 'y':
+  case RIGHT:
     catmovex = min(1,catmovex+1);
     System.out.println(catmovex);
     break;
-  case 'h':
+  case LEFT:
     catmovex = max(-1,catmovex-1);
     System.out.println(catmovex);
     break;
+  case UP:
+    catmovey = min(1,catmovey+1);
+    System.out.println(catmovey);
+    
+   case DOWN:
+    catmovey = min(1,catmovey-1);
+    System.out.println(catmovey);
+    
+
   }
 }

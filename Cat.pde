@@ -40,7 +40,7 @@ Cat(){
     stroke(color(0, 255, 0));
     fill(color(255, 0, 0, 125));
     
-    scale(50);
+    scale(150);
 
     shape(shape,0,0);
 

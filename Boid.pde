@@ -230,6 +230,8 @@ class Boid {
     
     //shape(ct,0,0,8,8);
   //  }else{
+     
+    //shader(lineShader,LINES);
     shape(s,0,0);
 
     //}
@@ -237,18 +239,6 @@ class Boid {
     popStyle();
     hint(ENABLE_DEPTH_TEST);
  
-    //Aplicando brenchmark
-    /*
-    fcount += 1;
-    int m = millis();
-    if (m - lastm > 1000 * fint) {
-      frate = float(fcount) / fint;
-      fcount = 0;
-      lastm = m;
-      println("fps: " + frate); 
-    }
-    fill(0);
-    text("fps: " + frate, 10, 20);   
-    */
+
   }
 }
