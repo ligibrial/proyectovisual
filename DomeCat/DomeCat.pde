@@ -12,6 +12,17 @@
  */
  
 import java.nio.IntBuffer;
+import frames.input.*;
+import frames.input.event.*;
+import frames.primitives.*;
+import frames.core.*;
+import frames.processing.*;
+
+int catx=100,caty=100,catz=100;
+int catmovex=0,catmovey=0,catmovez=0;
+Scene scene;
+
+boolean animate = true;
 
 PShader cubemapShader;
 PShape domeSphere;
@@ -21,14 +32,20 @@ IntBuffer rbo;
 IntBuffer envMapTextureID;
 
 int envMapSize = 1024;   
+Cat gato;
+
 
 void setup() {
   size(640, 640, P3D);
   initCubeMap();
+  //gato =  new Cat();
+  //ct = gato.getShape();
 }
 
 void draw() {
   background(0);
+
+ 
   drawCubeMap();  
 }
 
@@ -47,7 +64,13 @@ void drawScene() {
   lights();
   noStroke();
   translate(mouseX, mouseY, 200);
-  rotateX(frameCount * 0.01);
-  rotateY(frameCount * 0.01);  
-  box(100);
+  rotateX(90);
+  //rotateX(frameCount * 0.01);
+  //rotateY(frameCount * 0.01);  
+  //sphere(100);
+  //box(200);
+  
+  gato =  new Cat();
+  gato.getShape();
+ 
 }
