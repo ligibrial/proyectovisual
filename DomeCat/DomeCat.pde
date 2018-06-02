@@ -33,8 +33,9 @@ IntBuffer envMapTextureID;
 
 int envMapSize = 1024;   
 Cat gato;
+int x=0, y=0;
 
-
+float r = random(50);
 void setup() {
   size(640, 640, P3D);
   initCubeMap();
@@ -60,17 +61,32 @@ void drawScene() {
   for (int i = -height; i < 2 * height; i += 50) {
     line(-width, i, -100, 2 * width, i, -100);
   }
+   
+  
+  /*
+  for (int i=0; i<3; i++){
+    box(100,100,350);
+    translate(x++,y++);
+  }
+  */
+  
+  pushMatrix();
+  r = random(-width,width);
+  box(100,100,350);
+  translate(r,r);
+  System.out.println(r);
+  popMatrix();
   
   lights();
   noStroke();
-  translate(mouseX, mouseY, 200);
+  translate(mouseX, mouseY, 0);
   rotateX(90);
   //rotateX(frameCount * 0.01);
   //rotateY(frameCount * 0.01);  
-  //sphere(100);
+  sphere(100);
   //box(200);
   
-  gato =  new Cat();
-  gato.getShape();
- 
+  //gato =  new Cat();
+  //gato.getShape();
+  //translate(-150,-150);
 }
