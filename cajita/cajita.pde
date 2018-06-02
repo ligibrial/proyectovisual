@@ -1,7 +1,5 @@
-int move = -1;
-float boxX = width/2, boxY=height/2, boxZ;
-int i = 1;
-float rotZ, rotY, rotX;
+int move=-1, i=1;;
+float boxX=width/2, boxY=height/2, boxZ, rotX, rotY, rotZ;
 
 void setup() {
   size(650, 650, P3D);
@@ -46,7 +44,6 @@ void draw() {
     // draw a white box outline at (0, 0, 0)
     stroke(255);
     //box(50);
-    //delay(1);
     // the box was drawn at (0, 0, 0), store that location
     boxX = modelX(0, 0, 0);
     boxY = modelY(0, 0, 0);
@@ -54,18 +51,11 @@ void draw() {
     // clear out all the transformations
     
     
-    if(random(1)>0.5){
-      if(boxX > width) boxX -= 20;
-      if(boxX < 0) boxX += 20;
-      if(boxY > height) boxY -=20;
-      if(boxY < 0) boxY +=20;
-    }
-    else{
       if(boxX > width) boxX = 0;
       if(boxX < 0) boxX = width;
       if(boxY > height) boxY =0;
       if(boxY < 0) boxY =height;
-    }
+    
     
     /*
     if(boxX > width || boxX < 0 || boxY > height || boxY < 0){
